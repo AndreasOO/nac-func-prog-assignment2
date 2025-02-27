@@ -4,43 +4,28 @@ import java.io.File
 
 data class Point(val x: Int, val y: Int)
 
-fun calcTreesInSlope(xIncr: Int, yIncr: Int, yBound: Int, travelMap: Map<Point, String>): Int {
-    var x = 0
-    var y = 0
-    var count = 0
-    while (y <= yBound) {
-        y+=yIncr
-        x += xIncr
-        x %= 31
-        if (travelMap[Point(x, y)].equals("#")) {
-            count++
-        }
+tailrec fun calcTreesInSlope(x:Int = 0, y:Int = 0, xIncr: Int, yIncr: Int, yBound: Int, travelMap: Map<Point, Char>, count:Long=0L): Long {
+    if (y>yBound) return count
+
+    return when (travelMap[Point(x, y)] == '#') {
+        true -> calcTreesInSlope((x+xIncr)%31, y+yIncr, xIncr, yIncr, yBound, travelMap, count+1)
+        false -> calcTreesInSlope((x+xIncr)%31, y+yIncr, xIncr, yIncr, yBound, travelMap, count)
     }
-    println(count)
-    return count
 }
 
 fun main() {
     val mapData = File("aoc-input/aoc-2020-3a-input.txt").readLines().toList()
 
+    val travelMap: MutableMap<Point, Char> = HashMap()
 
-    val travelMap : MutableMap<Point, String> = HashMap()
-
-    var y = 0;
-    var x = 0;
-    for (line in mapData ) {
-        for (symbol in line.trim().split("")) {
-            if (symbol.isEmpty()) continue
-            travelMap.putIfAbsent(Point(x, y), symbol)
-            x++
+    mapData.forEachIndexed { y, line ->
+        line.trim().forEachIndexed { x, symbol ->
+            travelMap.putIfAbsent(Point(x % line.length, y), symbol)
         }
-        y++
-        x = 0
     }
 
-    val res = calcTreesInSlope(3,1,mapData.size-1, travelMap).toLong()
-
-    println(res) // should be 240
+    val result = calcTreesInSlope(0,0,3,1,mapData.size-1, travelMap)
+    println(result) // should be 240
 
 
 }

@@ -1,6 +1,8 @@
-package part1.aoc_2020_3.a
+package part1.aoc_2020_3.b
+
 
 import java.io.File
+
 
 data class Point(val x: Int, val y: Int)
 
@@ -38,9 +40,17 @@ fun main() {
         x = 0
     }
 
-    val res = calcTreesInSlope(3,1,mapData.size-1, travelMap).toLong()
 
-    println(res) // should be 240
+    val count1 = calcTreesInSlope(1,1,mapData.size-1, travelMap).toLong()
+    val count2 = calcTreesInSlope(3,1,mapData.size-1, travelMap).toLong()
+    val count3 = calcTreesInSlope(5,1,mapData.size-1, travelMap).toLong()
+    val count4 = calcTreesInSlope(7,1,mapData.size-1, travelMap).toLong()
+    val count5 = calcTreesInSlope(1,2,mapData.size-1, travelMap).toLong()
+
+
+    val res = (count1*count2*count3*count4*count5) // should be 2832009600
+
+    println(res) // should be 2832009600
 
 
 }

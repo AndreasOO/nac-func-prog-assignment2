@@ -1,6 +1,7 @@
 package part2
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions.*;
 
 /**
  *
@@ -39,7 +40,7 @@ Tomten
   val hierarchyMapEmpty: Map<String, Set<String>> = mapOf()
 
 
-@org.junit.jupiter.api.Test
+@Test
  fun allHierarchiesHappyFlow() {
  assertEquals(setOf("Glader", "Butter", "Tröger", "Trötter", "Blyger", "Rådjuret", "Nyckelpigan", "Haren",
                     "Räven", "Skumtomten", "Gråsuggan", "Myran", "Dammråttan", "Bladlusen"),
@@ -73,14 +74,14 @@ Tomten
  assertEquals(setOf("Bladlusen"), findGnomesBelow("Myran", hierarchyMapHappyFlow))
  }
 
- @org.junit.jupiter.api.Test
+ @Test
  fun fakeNamesInExistingMap() {
   assertEquals(setOf<String>(), findGnomesBelow("TEST1", hierarchyMapHappyFlow))
   assertEquals(setOf<String>(), findGnomesBelow("TEST2", hierarchyMapHappyFlow))
   assertEquals(setOf<String>(), findGnomesBelow("TEST3", hierarchyMapHappyFlow))
  }
 
- @org.junit.jupiter.api.Test
+ @Test
  fun allHierarchiesEmpty() {
   assertEquals(setOf<String>(), findGnomesBelow("Tomten", hierarchyMapEmpty))
 

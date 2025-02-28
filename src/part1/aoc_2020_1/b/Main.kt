@@ -3,10 +3,6 @@ package part1.aoc_2020_1.b
 import java.io.File
 
 
-// Use data class with tail recursive to get rid of 3 for loops (0n2) is bad
-data class CombinationHolder(val num1: Int, val num2: Int, val num3: Int) {
-
-}
 
 fun main() {
 

@@ -21,7 +21,11 @@ fun main() {
     println(result) // should be 240
 }
 
-tailrec fun calcTreesInSlope(x:Int = 0, y:Int = 0, xIncr: Int, yIncr: Int, yBound: Int, travelMap: Map<Point, Char>, count:Long=0L): Long {
+tailrec fun calcTreesInSlope(x:Int = 0, y:Int = 0,
+                             xIncr: Int, yIncr: Int, yBound: Int,
+                             travelMap: Map<Point, Char>,
+                             count:Long=0L): Long {
+
     if (y>yBound) return count
 
     return when (travelMap[Point(x, y)] == '#') {

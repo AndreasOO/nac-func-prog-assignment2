@@ -19,9 +19,9 @@ Tomten
 ├── Nyckelpigan
 ├── Haren
 └── Räven
-├── Gråsuggan
-└── Myran
-└── Bladlusen
+    ├── Gråsuggan
+    └── Myran
+         └── Bladlusen
 
  */
 
@@ -72,6 +72,8 @@ Tomten
  assertEquals(setOf<String>(), findGnomesBelow("Gråsuggan", hierarchyMapHappyFlow))
 
  assertEquals(setOf("Bladlusen"), findGnomesBelow("Myran", hierarchyMapHappyFlow))
+
+ assertEquals(setOf<String>(), findGnomesBelow("Bladlusen", hierarchyMapHappyFlow))
  }
 
  @Test

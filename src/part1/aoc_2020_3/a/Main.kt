@@ -15,7 +15,7 @@ fun main() {
     val yBound = mapData.size-1
 
     mapData.forEachIndexed { y, line ->
-        line.trim().forEachIndexed { x, symbol ->
+        line.forEachIndexed { x, symbol ->
             travelMap.putIfAbsent(Point(x, y), symbol)
         }
     }

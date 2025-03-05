@@ -13,17 +13,20 @@ fun main() {
 
     val travelMap: MutableMap<Point, Char> = HashMap()
 
+    val xBound = mapData[0].length
+    val yBound = mapData.size-1
+
     mapData.forEachIndexed { y, line ->
         line.trim().forEachIndexed { x, symbol ->
-                travelMap.putIfAbsent(Point(x % line.length, y), symbol)
+                travelMap.putIfAbsent(Point(x, y), symbol)
         }
     }
 
-    val count1 = calcTreesInSlope(0,0,1,1,mapData.size-1, travelMap)
-    val count2 = calcTreesInSlope(0,0,3,1,mapData.size-1, travelMap)
-    val count3 = calcTreesInSlope(0,0,5,1,mapData.size-1, travelMap)
-    val count4 = calcTreesInSlope(0,0,7,1,mapData.size-1, travelMap)
-    val count5 = calcTreesInSlope(0,0,1,2,mapData.size-1, travelMap)
+    val count1 = calcTreesInSlope(0,0,1,1,xBound, yBound, travelMap)
+    val count2 = calcTreesInSlope(0,0,3,1,xBound, yBound, travelMap)
+    val count3 = calcTreesInSlope(0,0,5,1,xBound, yBound, travelMap)
+    val count4 = calcTreesInSlope(0,0,7,1,xBound, yBound, travelMap)
+    val count5 = calcTreesInSlope(0,0,1,2,xBound, yBound, travelMap)
 
 
     val res = (count1*count2*count3*count4*count5) // should be 2832009600
@@ -32,14 +35,15 @@ fun main() {
 }
 
 tailrec fun calcTreesInSlope(x:Int = 0, y:Int = 0,
-                             xIncr: Int, yIncr: Int, yBound: Int,
+                             xIncr: Int, yIncr: Int,
+                             xBound: Int, yBound: Int,
                              travelMap: Map<Point, Char>,
                              count:Long=0L): Long {
 
     if (y>yBound) return count
 
     return when (travelMap[Point(x, y)] == '#') {
-        true -> calcTreesInSlope((x+xIncr)%31, y+yIncr, xIncr, yIncr, yBound, travelMap, count+1)
-        false -> calcTreesInSlope((x+xIncr)%31, y+yIncr, xIncr, yIncr, yBound, travelMap, count)
+        true -> calcTreesInSlope((x+xIncr)%xBound, y+yIncr, xIncr, yIncr, xBound, yBound, travelMap, count+1)
+        false -> calcTreesInSlope((x+xIncr)%xBound, y+yIncr, xIncr, yIncr, xBound, yBound, travelMap, count)
     }
 }
